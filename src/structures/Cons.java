@@ -1,5 +1,3 @@
-
-
 package structures;
 
 import java.util.Collection;
@@ -10,9 +8,9 @@ import java.util.function.Predicate;
 
 import static java.lang.System.out;
 
-/**
+/**  A Lisp-like Cons cell.
  * @author Christian Tschoepe
- * @author Adapted from the Lisp-like Cons cell from Dr. Gordon Novak Jr., my Data Structures professor at the University of Texas at Austin.
+ * @author Adapted from the from Dr. Gordon Novak Jr., my Data Structures professor at the University of Texas at Austin.
  */
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
