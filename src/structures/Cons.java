@@ -324,8 +324,6 @@ public class Cons<E> implements Iterable<E> {
 	}
 	
 	
-	
-	
     // iterative version of length
 	public static int length (Cons lst) {
 		if(cyclic(lst)) // Avoid infinite loop. Potentially destructive
