@@ -14,7 +14,7 @@ Uses a Lisp-like `Cons` cell pattern for matching with a intermediary compiler t
 
 #### `match(pattern, input)`
 `Cons Cons.match(Object pattern, Object input)`  returns a list of `Cons` bindings. <BR/>
-An unknown, which must match and consistently match the same value is labeled `?var_name`. A splat or variadic variable is denoted `?list_name*`, witch (at the moment) does not match consistently acts as kind of 1 or more things buffer until the next thing in the pattern is matched.<BR/>
+An unknown, which must match and consistently match the same value is labeled `?var_name`. A splat or variadic variable is denoted `?list_name*`, which (at the moment) does not match consistently acts as kind of 1 or more things buffer until the next thing in the pattern is matched.<BR/>
 **Note: Currently splat variables are greedy and have interesting behavior if not used at the end of a pattern match.**
 
 	read("3"); // => 3
