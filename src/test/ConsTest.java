@@ -173,7 +173,7 @@ public class ConsTest {
 		assertEquals(read("( (?first 0) (?rest* (1 2)) )"), match(pat, read("(+ 0 1 2)")));
 		
 		pat = readc("(* ?a ?b* ?c");
-		assertNull(match(pat, read("(* 1 2)")));
+		assertEquals(read("( (?a 1) (?b* ()) (?c 2) )"), match(pat, read("(* 1 2)")));
 		assertEquals(read("( (?a 1) (?b* (2)) (?c 3))"), match(pat, read("(* 1 2 3)")));
 		assertEquals(read("( (?a 1) (?b* (2 5)) (?c 3))"), match(pat, read("(* 1 2 5 3)")));
 		assertEquals(read("( (?a 1) (?b* ((a b c d))) (?c 3))"), match(pat, read("(* 1 (a b c d) 3)")));

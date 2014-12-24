@@ -6,6 +6,35 @@ cons-compiler
 *   Cons Compiler
 
 #Cons Compiler
+Uses a Lisp-like `Cons` cell pattern for matching with a intermediary compiler to a lisp-esque language.
+
+### `read(String s)` and `match(Object pattern, Object input)` 
+#### `read(string)`
+`Cons read(String s)` compiles a String into a lisp-esque cell in Java. <BR/>
+
+#### `match(pattern, input)`
+`Cons Cons.match(Object pattern, Object input)`  returns a list of `Cons` bindings. <BR/>
+An unknown, which must match and consistently match the same value is labeled `?var_name`. A splat or variadic variable is denoted `?list_name*`, witch (at the moment) does not match consistently acts as kind of 1 or more things buffer until the next thing in the pattern is matched.<BR/>
+**Note: Currently splat variables are greedy and have interesting behavior if not used at the end of a pattern match.**
+
+	read("3"); // => 3
+	read("abcd"); // => "abcd"
+	read("(\"I am a string\" 'me too')"); // Java => list("I am a string", "me too") 
+	read("(a b c)"); // Java => list("a", "b", "c")
+		// Lisp => (list* 'a 'b 'c NIL)
+	read("( (+ 3 5) )"); // Java => list(list("+", 3, 5))
+		// Lisp => '((+ 3 5))
+	
+	Cons pattern = readc("(+ ?a ?b*)"); // Java => list("+", "?a", "?b*")
+	match(pattern, readc("(% 3 2)"));
+		// Java => null (NO MATCH)
+	match(pattern, readc("(+ 1)")); 
+		// Java => list(list("?a", 1), list("?b*", list("")))
+	match(pattern, readc("(+ 1 2)")); 
+		// Java => list(list("?a", 1), list("?b*", list(2)))
+	match(pattern, readc("(+ 5 9 (- 4 5) 1)"));
+		// Java => list( list("?a", 5), list("?b*", list( 9, list("-", 4, 5), 1 )) );
+		// Lisp => '( (?a 5) (?b* '(9 (- 4 5) 1)) )
 
 #Data Structures
 
