@@ -577,18 +577,14 @@ public class Cons<E> implements Iterable<E> {
 		
 		if (consp(pattern)) {
 			if (consp(input)) {
-//				Cons notSplat = (Cons) pattern;
-//				while(notSplat != null && splatvarp(first(notSplat))) {
-//					notSplat = rest(notSplat);
-//				}
-//				if(! exist(rest((Cons) input), in -> matches() != null))
-				
 				out.println("\tCONSP>");
 				// TODO: Check lengths left for patterns such as (?a ?b* ?c) against (1 2 3 4) => ((?a 1) (?b (2 3)) (?c 4))
-				if(splatvarp(first((Cons) pattern))  /*&& (!exist(rest((Cons) input), o -> mrest((Cons) input)))*/) { //!( first((Cons) input).equals(rest((Cons) pattern)) )
+				if(splatvarp(first((Cons) pattern))) { //!( first((Cons) input).equals(rest((Cons) pattern)) )
 					Cons notSplats = filter(rest((Cons) pattern), pat -> !splatvarp(pat));
 					Cons inpc = rest((Cons) input), temp = inpc;
 					
+					// iff inpc == null then we can try splatvarp.
+					// unless there are no more patterns, in which case match all of the rest.
 					boolean backup = rest((Cons) pattern) == null;
 					if(!backup) {
 						for(Object pat : notSplats) {
@@ -605,13 +601,11 @@ public class Cons<E> implements Iterable<E> {
 								rest((Cons) input),
 								matchb(first((Cons) pattern), first((Cons) input),
 										bindings));
-						
-					// if inpc == null then we can try splatvarp.
+					// Else If pattern exists that's needed to match right now, match by falling through
+					
 					//					if(rest((Cons) pattern) == null) { // Collect rest
 					
-					/*} else if(all(rest((Cons) input), o -> o != second((Cons) pattern))); // If pattern exists that's needed to match right now, match.
-
-					while(rest((Cons) input))*/
+					/*} else if(all(rest((Cons) input), o -> o != second((Cons) pattern))); */
 				
 				}  
 				
