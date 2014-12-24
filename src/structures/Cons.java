@@ -163,19 +163,19 @@ public class Cons<E> implements Iterable<E> {
 		return (n == null ? null : n.next);
 	}
 	
-	public static Object first(Cons c) {
+	public static <E> E first(Cons<E> c) {
 		return (c == null ? null : c.value);
 	}
 	
-	public static Object second(Cons c) {
+	public static<E> E second(Cons<E> c) {
 		return first(rest(c));
 	}
 	
-	public static Object third(Cons c) {
+	public static <E> E third(Cons<E> c) {
 		return first(rest(rest(c)));
 	}
 	
-	public static Object nth(Cons c, int n) {
+	public static <E> E nth(Cons<E> c, int n) {
 		for(int i = 0; c != null && i < n; i++) {
 			c = rest(c);
 		}
