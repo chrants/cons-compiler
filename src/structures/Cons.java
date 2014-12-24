@@ -623,7 +623,6 @@ public class Cons<E> implements Iterable<E> {
 					return null;
 			}
 		}
-		// I added this.
 		if (splatvarp(pattern)) {
 			out.print("\tS_VARP>");
 			Cons binding = assoc(pattern, bindings);
@@ -631,13 +630,8 @@ public class Cons<E> implements Iterable<E> {
 			if(input == null)
 				return bindings;
 			if (binding != null) {
-//				if (((Cons) second(binding)).contains(input))
-//					return bindings;
-//				else {
-					// TODO: Reverse when stop matching this binding.
-					binding.next.value = cons(input, (Cons) second(binding));
-					return bindings;
-//				}
+				binding.next.value = cons(input, (Cons) second(binding));
+				return bindings;
 			} else {
 				return cons(list(pattern, list(input)), bindings);
 			}
