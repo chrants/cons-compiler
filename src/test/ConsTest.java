@@ -163,7 +163,11 @@ public class ConsTest {
 		pat = readc("(+ ?a ?b)");
 		assertEquals(read("((?a 0) (?b 1))"), match(pat, read("(+ 0 1)")));
 		assertEquals(read("( (?a (* 3 4)) (?b (exp (- 5))) )"), match(pat, read("(+ (* 3 4) (exp (- 5)))")));
-		
+	}
+	
+	@Test
+	public void splatvarmatchTest() {
+		Cons pat;
 		pat = readc("(?a*)");
 		assertEquals(read("( (?a* (1)) )"), match(pat, read("(1)")));
 		assertEquals(read("( (?a* (5 4 3 2 1)) )"), match(pat, read("(5 4 3 2 1)")));
@@ -172,12 +176,16 @@ public class ConsTest {
 		assertEquals(read("( (?first 0) (?rest* (1)) )"), match(pat, read("(+ 0 1)")));
 		assertEquals(read("( (?first 0) (?rest* (1 2)) )"), match(pat, read("(+ 0 1 2)")));
 		
-		pat = readc("(* ?a ?b* ?c");
+		pat = readc("(* ?a ?b* ?c)");
 		assertEquals(read("( (?a 1) (?b* ()) (?c 2) )"), match(pat, read("(* 1 2)")));
 		assertEquals(read("( (?a 1) (?b* (2)) (?c 3))"), match(pat, read("(* 1 2 3)")));
 		assertEquals(read("( (?a 1) (?b* (2 5)) (?c 3))"), match(pat, read("(* 1 2 5 3)")));
 		assertEquals(read("( (?a 1) (?b* ((a b c d))) (?c 3))"), match(pat, read("(* 1 (a b c d) 3)")));
 		assertEquals(read("( (?a 1) (?b* ((a b c d) 2 4)) (?c 3))"), match(pat, read("(* 1 (a b c d) 2 4 3)")));
+		
+		pat = readc("(?a* (?x) ?a*)");
+		// TODO: Change behavior for below.
+		assertEquals(read("( (?a* (1 2 4 5)) (?x 3) )"), match(pat, read("(1 2 (3) 4 5)")));
 	}
 	
 	@Test
