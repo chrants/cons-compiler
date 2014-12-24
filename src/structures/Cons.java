@@ -1,3 +1,5 @@
+
+
 package structures;
 
 import java.util.Collection;
@@ -7,6 +9,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static java.lang.System.out;
+
+/**
+ * @author Christian Tschoepe
+ * @author Adapted from the Lisp-like Cons cell from Dr. Gordon Novak Jr., my Data Structures professor at the University of Texas at Austin.
+ */
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Cons<E> implements Iterable<E> {
